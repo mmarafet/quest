@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Вход</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/themes.css" />
+</head>
+<body class="center">
+
+  <div class="card cardNarrow">
+    <div class="brand">
+      <div class="badge"></div>
+      <div>
+        <div class="h1">TASK QUEST</div>
+        <div class="sub">Future-minimal • roles</div>
+      </div>
+    </div>
+
+    <h2 style="margin-top:18px;">Авторизация</h2>
+
+    <input id="login" placeholder="Логин (admin / boss / user)" autocomplete="username" />
+    <input id="password" type="password" placeholder="Пароль" autocomplete="current-password" />
+
+    <button class="btn btnPrimary" onclick="Auth.login()">Войти</button>
+
+    <div class="small" style="margin-top:12px;">
+      Демо доступы:<br />
+      <span class="muted">admin / admin123</span> — админ<br />
+      <span class="muted">boss / boss123</span> — начальник<br />
+      <span class="muted">user / user123</span> — сотрудник
+    </div>
+
+    <hr class="sep" />
+
+    <div class="row" style="align-items:stretch;">
+      <button class="btn btnGhost" onclick="Seed.resetDemo()">Сбросить демо</button>
+      <select class="themeSelect" id="themeSelect">
+        <option value="minimal">minimal</option>
+        <option value="game">game</option>
+        <option value="hitech">hitech</option>
+      </select>
+      <button class="btn themeBtn" onclick="Theme.toggle()">Сменить</button>
+    </div>
+    <div class="small" id="themeLabel" style="margin-top:8px;">Режим: ...</div>
+  </div>
+
+  <script src="js/store.js"></script>
+  <script src="js/seed.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/theme.js"></script>
+  <script>Theme.init();</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Мои задачи</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/themes.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="badge"></div>
+      <div>
+        <div class="h1">TASK QUEST</div>
+        <div class="sub" id="meLine"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="themeBar">
+      <span class="themePill" id="themeLabel">Режим: ...</span>
+      <select class="themeSelect" id="themeSelect">
+        <option value="minimal">minimal</option>
+        <option value="game">game</option>
+        <option value="hitech">hitech</option>
+      </select>
+      <button class="themeBtn" onclick="Theme.toggle()">Сменить</button>
+    </div>
+<button class="btn" onclick="Auth.logout()">Выйти</button>
+    </div>
+  </header>
+
+  <main class="container grid2">
+    <section class="card">
+      <div class="cardHeader">
+        <div>
+          <div class="cardTitle">Мои назначения</div>
+          <div class="cardHint">Открой задачу кликом</div>
+        </div>
+      </div>
+      <div class="cardBody">
+        <div id="myAssignments" class="list"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="cardHeader">
+        <div>
+          <div class="cardTitle" id="taskTitle">Открой назначение</div>
+          <div class="cardHint" id="taskDesc"></div>
+        </div>
+        <div class="pill" id="taskStars"></div>
+      </div>
+
+      <div class="cardBody">
+        <div id="taskForm" class="stack"></div>
+
+        <div class="gameOnly" style="margin-top:12px;">
+          <img src="assets/ui/reward-chest.png" style="width:180px; display:block; margin:0 auto;" alt="Награда">
+        </div>
+
+        <hr class="sep" />
+
+        <div class="row">
+          <button class="btn" onclick="Tasks.save()">Сохранить</button>
+
+          <button class="btn btnPrimary minOnly" onclick="Tasks.done()">ГОТОВО</button>
+
+          <button class="btn btnPrimary gameOnly" onclick="Tasks.done()">
+            <img src="assets/ui/btn-done.png" alt="ГОТОВО" style="width:220px; max-width:100%;">
+          </button>
+        </div>
+
+        <div id="msg" class="small ok" style="margin-top:10px;"></div>
+        <div class="small" style="margin-top:6px;">
+          ⚠️ MVP: файлы сохраняются в localStorage как base64 → видео лучше маленькие.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/store.js"></script>
+  <script src="js/seed.js"></script>
+  <script src="js/guard.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/tasks.js"></script>
+  <script>
+    Theme.init();
+    Guard.requireRole(["employee","boss","admin"]);
+    Tasks.init();
+  </script>
+</body>
+</html>

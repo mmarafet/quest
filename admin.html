@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Админ</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/themes.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="badge"></div>
+      <div>
+        <div class="h1">TASK QUEST</div>
+        <div class="sub" id="meLine"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="themeBar">
+      <span class="themePill" id="themeLabel">Режим: ...</span>
+      <select class="themeSelect" id="themeSelect">
+        <option value="minimal">minimal</option>
+        <option value="game">game</option>
+        <option value="hitech">hitech</option>
+      </select>
+      <button class="themeBtn" onclick="Theme.toggle()">Сменить</button>
+    </div>
+<a class="btn btnGhost" href="boss.html">Панель начальника</a>
+      <button class="btn" onclick="Auth.logout()">Выйти</button>
+    </div>
+  </header>
+
+  <main class="container grid2">
+    <section class="card">
+      <div class="cardHeader">
+        <div>
+          <div class="cardTitle">Создать задачу</div>
+          <div class="cardHint">Название + конструктор полей + звёзды</div>
+        </div>
+        <div class="pill" id="starsPreview">★★★☆☆</div>
+      </div>
+
+      <div class="cardBody">
+        <input id="tTitle" placeholder="Название задачи" value="Ежедневные цели" />
+
+        <div class="row">
+          <select id="tStars" onchange="Admin.updateStarsPreview()">
+            <option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option>
+          </select>
+          <input id="tDeadline" type="datetime-local" placeholder="Дедлайн (необязательно)" />
+        </div>
+
+        <hr class="sep" />
+
+        <div class="cardTitle" style="margin-bottom:8px;">Поля задания</div>
+        <div class="row">
+          <select id="addContentType">
+            <option value="desc">Текстовое поле (описание)</option>
+            <option value="checklist">Чек-лист</option>
+            <option value="photo1">Добавить фото</option>
+            <option value="photoM">Добавить несколько фото</option>
+            <option value="video1">Добавить видео</option>
+            <option value="videoM">Добавить несколько видео</option>
+            <option value="videoLink">Ссылка на видео</option>
+          </select>
+          <button class="btn btnPrimary" onclick="Admin.addContentField()">＋ Добавить</button>
+        </div>
+        <div id="contentFields" class="list" style="margin-top:10px;"></div>
+
+        <hr class="sep" />
+
+        <div class="cardTitle" style="margin-bottom:8px;">Блок обратной связи исполнителя</div>
+        <div class="row">
+          <select id="addFeedbackType">
+            <option value="done">Кнопка «выполнено»</option>
+            <option value="text">Текстовое поле</option>
+            <option value="select10">Количество 1..10</option>
+            <option value="number">Числовое поле</option>
+            <option value="photoLimit">Фото с ограничением</option>
+            <option value="videoLimit">Видео с ограничением</option>
+            <option value="checklist">Чек-лист</option>
+          </select>
+          <button class="btn btnPrimary" onclick="Admin.addFeedbackField()">＋ Добавить</button>
+        </div>
+        <div id="feedbackFields" class="list" style="margin-top:10px;"></div>
+
+        <hr class="sep" />
+
+        <button class="btn btnPrimary" onclick="Admin.createTaskV2()">Создать задачу</button>
+
+        <hr class="sep" />
+
+        <div class="small">Список задач</div>
+        <div id="tasksList" class="list"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/store.js"></script>
+  <script src="js/seed.js"></script>
+  <script src="js/guard.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/admin.js"></script>
+  <script>
+    Theme.init();
+    Guard.requireRole(["admin"]);
+    Admin.init();
+  </script>
+</body>
+</html>
